@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\demo;
 use App\Models\Note;
+use App\Models\User;
+use App\Models\Lists;
 
 class DashboardController extends Controller
 {
@@ -16,11 +18,15 @@ class DashboardController extends Controller
     public function index(){
         $demo=demo::get();
         $note=Note::get();
-        return view('dashboard/index',compact('demo','note'));
+        $user=User::get();
+        $list=Lists::get();
+        return view('dashboard/index',compact('demo','note','user','list'));
     }
 
     public function create(Request $request){
-        return view('dashboard/create');
+		$demo=demo::get();
+        $note=Note::get();
+        return view('dashboard/create',compact('demo','note'));
     }
 
     public function __destruct()
